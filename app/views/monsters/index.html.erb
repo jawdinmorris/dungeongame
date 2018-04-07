@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>The Arena</h1>
+<h2>Welcome to the arena, <%= @user.user_name %>. </h2>
+<h3> Are you ready to battle? </br> Choose your opponent below: </h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Level</th>
+      <th>Health</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @monsters.each do |monster| %>
+      <tr>
+        <td><%= monster.name %></td>
+        <td><%= monster.level %></td>
+        <td><%= monster.health %></td>
+        <td><%= link_to 'Battle', monster %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Monster', new_monster_path %>
