@@ -1,0 +1,63 @@
+<h2>Sign up</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+
+<h2> User Details </h2>
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  </div>
+
+<h2> Character Details </h2>
+  <div class="field">
+    <%= f.label :user_name %>
+    <%= f.text_field :user_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :user_level %>
+      <%= f.text_field :user_level, :readonly => true, :value => 1 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :experience %>
+      <%= f.text_field :experience, :readonly => true, :value => 0 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :attack %>
+      <%= f.text_field :attack, :readonly => true, :value => 10 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :defence %>
+      <%= f.text_field :defence, :readonly => true, :value => 10 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :health %>
+      <%= f.text_field :health, :readonly => true, :value => 100 %>
+  </div>
+
+
+  <div class="actions">
+    <%= f.submit "Sign up" %>
+  </div>
+<% end %>
+
+<%= render "users/shared/links" %>
