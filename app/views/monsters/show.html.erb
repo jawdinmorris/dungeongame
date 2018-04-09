@@ -1,34 +1,41 @@
 <p id="notice"><%= notice %></p>
+<% userDamage = @user.attack / @monster.defence %>
+<% monsterDamage = @monster.attack / @user.defence %>
+<p> userDamage = <%= @user.attack %> / <%= @monster.defence %> = <%= userDamage %>
+<p> monsterDamage = <%= @monster.attack %> / <%=@user.defence %> = <%= monsterDamage %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @monster.name %>
-</p>
+<table>
+  <th> Monster </th>
+  <th> <%= @user.user_name %> </th>
+    <tr>
+      <td>  <%= @monster.name %> </td>
+      <td> <%= @monster.level %>  </td>
+    </tr>
+    <tr>
+      <td>  <%= @user.user_name %> </td>
+      <td> <%= @user.user_level %>  </td>
+    </tr>
+</table>
+<% until @monster.health <= 0 || @user.health <= 0 do %>
+  <% if @monster.health > 0 && @user.health > 0 %>
+    <p><%=  @user.user_name %> hit's <%= @monster.name %> for <%= userDamage %> damage. <br>
+    <% @monster.health = @monster.health - userDamage %>
+    The <%= @monster.name %> has <%= @monster.health %> health left </p>
+ <% end %>
+ <% if @user.health > 0 && @monster.health > 0%>
+   <p><%=  @monster.name %> hit's <%= @user.user_name %> for <%= monsterDamage %> damage. <br>
+   <% @user.health = @user.health - monsterDamage %>
+   The <%= @user.user_name %> has <%= @user.health %> health left </p>
+<% end %>
+<% end %>
+<% if @monster.health <= 0 %>
+<p><strong> You won, you are awarded <%= @monster.xp_given %> xp and <%= @monster.gold_given %> gold. </strong> </p>
+<% @user.gold = @user.gold + @monster.gold_given %>
+<% @user.xp = @user.xp + @monster.xp_given %>
+<% elsif @user.health <= 0 %>
+<p><strong> You lost, hang your head in shame. </strong></p>
+<% end %>
+<% @user.save %>
+<!-- <% @user.health = @user.health - @monster.attack %> -->
 
-
-<p>
-  <strong>Level:</strong>
-  <%= @monster.level %>
-</p>
-
-
-<p>
-  <strong>Attack:</strong>
-  <%= @monster.attack %>
-</p>
-
-
-<p>
-  <strong>Defence:</strong>
-  <%= @monster.defence %>
-</p>
-
-
-<p>
-  <strong>Health:</strong>
-  <%= @monster.health %>
-</p>
-
-
-<%= link_to 'Edit', edit_monster_path(@monster) %> |
 <%= link_to 'Back', monsters_path %>

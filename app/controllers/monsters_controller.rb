@@ -11,6 +11,8 @@ class MonstersController < ApplicationController
   # GET /monsters/1
   # GET /monsters/1.json
   def show
+    @user = current_user
+    @monsters = Monster.all
   end
 
   # GET /monsters/new
