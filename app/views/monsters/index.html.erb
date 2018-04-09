@@ -20,7 +20,7 @@
         <td><%= monster.name %></td>
         <td><%= monster.level %></td>
         <td><%= monster.health %></td>
-        <td><%= link_to 'Battle', monster %></td>
+        <td><%= link_to 'Battle', monster, :method => :get%></td>
       </tr>
     <% end %>
   </tbody>
