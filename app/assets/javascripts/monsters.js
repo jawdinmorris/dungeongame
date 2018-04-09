@@ -1,7 +1,7 @@
 // # Place all the behaviors and hooks related to the matching controller here.
 // # All this logic will automatically be available in application.js.
 // # You can use CoffeeScript in this file: http://coffeescript.org/
-var sec = 4;
+var sec = 3;
 var myTimer = document.getElementById('myTimer');
 var myBtn = document.getElementById('myBtn');
 var battleScreen = document.getElementById('battleScreen');
