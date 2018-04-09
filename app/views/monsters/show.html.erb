@@ -12,6 +12,8 @@
   <li> Attack: <%= @monster.attack %> </li>
   <li> Defence: <%= @monster.defence %> </li>
 </ul>
+<div id="myTimer"></div>
+<div id = "battleScreen" style="display:none">
 <h2> Battle Results </h2>
 <div style="height:300px;width:400px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
 <% until @monster.health <= 0 || @user.health <= 0 do %>
@@ -31,6 +33,7 @@
 <% end %>
 <% end %>
 </div>
+
 <!-- BATTLE RECORD -->
 <p>
 <%= @user.user_name %> hit <%= userDamageAvg.count%> times. (Average: <% userTest = userDamageAvg.sum / userDamageAvg.size.to_f %>  <%=(userTest.is_a?(Float) && userTest.nan?) ? 0 : userTest %> )
@@ -52,7 +55,15 @@
 <% elsif @user.health <= 0 %>
   <p><strong> You lost, hang your head in shame. </strong></p>
 <% end %>
+
+
 <% @user.save %>
 <!-- <% @user.health = @user.health - @monster.attack %> -->
-<%= link_to 'Battle Again', @monster %>
+<div id="wrapper">
+
+<form action="" method="get">
+  <input type="submit" value="Fight Again" id="myBtn" class="btnDisable" disabled>
+</form>
+</div>
+</div>
 <%= link_to 'Back', monsters_path %>
