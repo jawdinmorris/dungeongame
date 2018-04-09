@@ -8,32 +8,28 @@
 
   <body>
 
-    <p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
 <% if user_signed_in? %>
-<table>
-<tr>
-  <td> <strong> Name: </strong><%= @user.user_name %>    </td>
-  <td> <strong> Gold: </strong><%= @user.gold %> </td>
-  <td> <strong> Attack:</strong> <%= @user.attack %> </td>
-</tr>
-<tr>
-  <td> <strong> Level:</strong> <%= @user.user_level %> </td>
-  <td> </td>
-  <td> <strong> Defence:</strong><%= @user.defence %> </td>
-</tr>
-<tr>
-  <td> <strong> Exp: </strong> <%= @user.xp %> / <%=((10 + @user.user_level) * 10)%></td>
-  <td> </td>
-  <td> <strong> Health: </strong> <%= @user.health %></td>
-</tr>
-</table>
-<li>
-  <%= link_to('Map', root_path) %>
-</li>
-<li>
-<%= link_to('Logout', destroy_user_session_path, method: :delete) %>
-</li>
+<div class = "container" >
+<div class="row">
+  <div class="col-sm-3"><strong> Name: </strong><%= @user.user_name %> </div>
+  <div class="col-sm-3"><strong> Gold: </strong><%= @user.gold %></div>
+  <div class="col-sm-3"><strong> Attack:</strong> <%= @user.attack %> </div>
+  <div class="col-sm-3"> <strong>  <%= link_to('Map', root_path) %></strong></div>
+</div>
+<div class="row">
+  <div class="col-sm-3"><strong>Level:</strong> <%= @user.user_level %></div>
+  <div class="col-sm-3"></div>
+  <div class="col-sm-3"><strong> Defence:</strong><%= @user.defence %></div>
+  <div class="col-sm-3"> <strong> <%= link_to 'Profile', current_user %> </strong> </div>
+</div>
+<div class="row">
+  <div class="col-sm-3"><strong> Exp: </strong> <%= @user.xp %> / <%=((10 + @user.user_level) * 10)%></div>
+  <div class="col-sm-3"></div>
+  <div class="col-sm-3"><strong> Health: </strong> <%= @user.health %></div>
+  <div class="col-sm-3"> <strong>  <%= link_to('Logout', destroy_user_session_path, method: :delete) %> </strong></div>
+</div>
+</div>
+
 <% else %>
 <li>
 <%= link_to('Login', new_user_session_path)  %>

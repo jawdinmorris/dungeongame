@@ -1,3 +1,4 @@
+    <%= stylesheet_link_tag    "monsters" %>
 <p id="notice"><%= notice %></p>
 <% userDamage = (@user.attack * 5) / @monster.defence  %>
 <% monsterDamage = (@monster.attack * 5) / @user.defence  %>
@@ -6,22 +7,30 @@
 <% monsterDamageAvg = [] %>
 <% xpNeeded = ((10 + @user.user_level) * 10) - @user.xp %>
 
-
-<h1> <%= @monster.name %> </h1>
- <ul>
-  <li> Health:  <%= @monster.health %> </li>
-  <li> Attack: <%= @monster.attack %> </li>
-  <li> Defence: <%= @monster.defence %> </li>
-</ul>
+<div class = "container">
+<div class = "row">
+  <div class = "col-sm-6 userStats">
+    <h1> <%= @user.user_name %> </h1>
+      <p> Health:  <%= @user.health %> </p>
+      <p> Attack: <%= @user.attack %> </p>
+      <p> Defence: <%= @user.defence %> </p>
+  </div>
+  <div class = "col-sm-6 monsterStats">
+    <h1> <%= @monster.name %> </h1>
+    <p> Health:  <%= @monster.health %> </p>
+    <p> Attack: <%= @monster.attack %> </p>
+    <p> Defence: <%= @monster.defence %> </p>
+  </div>
+</div>
 <div id="myTimer"></div>
 <div id = "battleScreen" style="display:none">
 <h2> Battle Results </h2>
-<div style="height:300px;width:400px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+<div id = "battleScroll">
 <% until @monster.health <= 0 || userHealth <= 0 do %>
   <!-- USER ATTACK -->
   <% if @monster.health > 0 && userHealth > 0 %>
   <% userCurrentDamage = rand(userDamage..(userDamage*2).round) %>
-    <% @monster.health = @monster.health - userDamage %>
+    <% @monster.health = @monster.health - userCurrentDamage %>
     <% userDamageAvg << userCurrentDamage %>
     <p style="text-align:left; color:green"><%=  @user.user_name %> hit's <%= @monster.name %> for <%=  userCurrentDamage %> damage. <br>
     The <%= @monster.name %> has <%= @monster.health %> health left </p>
@@ -64,6 +73,7 @@
 <form action="" method="get">
   <input type="submit" value="Fight Again" id="myBtn" class="btnDisable" disabled>
 </form>
+</div>
 </div>
 </div>
 <%= link_to 'Back', monsters_path %>

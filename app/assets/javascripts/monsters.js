@@ -21,7 +21,7 @@ function countDown() {
     $("#myBtn").removeAttr("disabled");
     $("#myBtn").removeClass().addClass("btnEnable");
 
-    $("#battleScreen").fadeIn(1000, 1);
+    battleScreen.style.display = "block";
 
     myBtn.value = "Fight Again!";
     return;
