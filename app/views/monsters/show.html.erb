@@ -1,41 +1,58 @@
 <p id="notice"><%= notice %></p>
 <% userDamage = @user.attack / @monster.defence %>
 <% monsterDamage = @monster.attack / @user.defence %>
-<p> userDamage = <%= @user.attack %> / <%= @monster.defence %> = <%= userDamage %>
-<p> monsterDamage = <%= @monster.attack %> / <%=@user.defence %> = <%= monsterDamage %>
+<% userDamageAvg = [] %>
+<% monsterDamageAvg = [] %>
+<% xpNeeded = ((10 + @user.user_level) * 10) - @user.xp %>
 
-<table>
-  <th> Monster </th>
-  <th> <%= @user.user_name %> </th>
-    <tr>
-      <td>  <%= @monster.name %> </td>
-      <td> <%= @monster.level %>  </td>
-    </tr>
-    <tr>
-      <td>  <%= @user.user_name %> </td>
-      <td> <%= @user.user_level %>  </td>
-    </tr>
-</table>
+
+<h1> <%= @monster.name %> </h1>
+ <ul>
+  <li> Health:  <%= @monster.health %> </li>
+  <li> Attack: <%= @monster.attack %> </li>
+  <li> Defence: <%= @monster.defence %> </li>
+</ul>
+<h2> Battle Results </h2>
+<div style="height:300px;width:400px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
 <% until @monster.health <= 0 || @user.health <= 0 do %>
+  <!-- USER ATTACK -->
   <% if @monster.health > 0 && @user.health > 0 %>
-    <p><%=  @user.user_name %> hit's <%= @monster.name %> for <%= userDamage %> damage. <br>
     <% @monster.health = @monster.health - userDamage %>
+    <% userDamageAvg << userDamage %>
+    <p><%=  @user.user_name %> hit's <%= @monster.name %> for <%= userDamage %> damage. <br>
     The <%= @monster.name %> has <%= @monster.health %> health left </p>
  <% end %>
+ <!-- MONSTER ATTACK -->
  <% if @user.health > 0 && @monster.health > 0%>
+    <% @user.health = @user.health - monsterDamage %>
+    <% monsterDamageAvg << monsterDamage %>
    <p><%=  @monster.name %> hit's <%= @user.user_name %> for <%= monsterDamage %> damage. <br>
-   <% @user.health = @user.health - monsterDamage %>
    The <%= @user.user_name %> has <%= @user.health %> health left </p>
 <% end %>
 <% end %>
+</div>
+<!-- BATTLE RECORD -->
+<p>
+<%= @user.user_name %> hit <%= userDamageAvg.count%> times. (Average: <% userTest = userDamageAvg.sum / userDamageAvg.size.to_f %>  <%=(userTest.is_a?(Float) && userTest.nan?) ? 0 : userTest %> )
+</p>
+<p>
+<%= @monster.name %> hit <%= monsterDamageAvg.count%> times. (Average: <% monsterTest = monsterDamageAvg.sum / monsterDamageAvg.size.to_f %>  <%=(monsterTest.is_a?(Float) && monsterTest.nan?) ? 0 : monsterTest%> )
+</p>
+<!-- USER WINS -->
 <% if @monster.health <= 0 %>
-<p><strong> You won, you are awarded <%= @monster.xp_given %> xp and <%= @monster.gold_given %> gold. </strong> </p>
-<% @user.gold = @user.gold + @monster.gold_given %>
-<% @user.xp = @user.xp + @monster.xp_given %>
+  <p><strong> You won, you are awarded <%= @monster.xp_given %> xp and <%= @monster.gold_given %> gold. </strong> </p>
+  <% @user.gold = @user.gold + @monster.gold_given %>
+  <% @user.xp = @user.xp + @monster.xp_given %>
+  <% if @monster.xp_given >= xpNeeded  %>
+    <p><strong> Congratulations you have reached Level <%= @user.user_level + 1 %>. <strong> </p>
+    <% @user.user_level = 1 + @user.user_level %>
+    <% @user.xp = 0 + (@monster.xp_given - xpNeeded)%>
+  <%end%>
+  <!-- USER LOSES  -->
 <% elsif @user.health <= 0 %>
-<p><strong> You lost, hang your head in shame. </strong></p>
+  <p><strong> You lost, hang your head in shame. </strong></p>
 <% end %>
 <% @user.save %>
 <!-- <% @user.health = @user.health - @monster.attack %> -->
-
+<%= link_to 'Battle Again', @monster %>
 <%= link_to 'Back', monsters_path %>

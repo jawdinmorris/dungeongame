@@ -4,7 +4,8 @@
 <ul>
 
   <li> Level: <%= @user.user_level %> </li>
-  <li> Exp: <%= @user.experience %> / 25 </li>
+  <li> Exp: <%= @user.xp %> / <%= (10 + @user.user_level) * 10 %></li>
+    <li> Gold: <%= @user.gold %> </li>
     <li> Health: <%= @user.health %> / 100</li>
   <li> Attack: <%= @user.attack %> </li>
   <li> Defence: <%= @user.defence %> </li>

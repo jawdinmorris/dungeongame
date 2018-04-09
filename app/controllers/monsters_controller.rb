@@ -1,10 +1,10 @@
 class MonstersController < ApplicationController
   before_action :set_monster, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_user
   # GET /monsters
   # GET /monsters.json
   def index
-    @user = current_user
+
     @monsters = Monster.all
   end
 
@@ -69,9 +69,11 @@ class MonstersController < ApplicationController
     def set_monster
       @monster = Monster.find(params[:id])
     end
-
+    def set_user
+      @user = current_user
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def monster_params
-      params.require(:monster).permit(:name, :level, :attack, :defence, :health, :description)
+      params.require(:monster).permit(:name, :level, :attack, :defence, :health, :description, :xp_given, :gold_given)
     end
 end

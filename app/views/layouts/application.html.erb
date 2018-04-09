@@ -21,7 +21,7 @@
   <td> <strong> Defence:</strong><%= @user.defence %> </td>
 </tr>
 <tr>
-  <td> <strong> Exp: </strong> <%= @user.xp %> </td>
+  <td> <strong> Exp: </strong> <%= @user.xp %> / <%=((10 + @user.user_level) * 10)%></td>
   <td> </td>
   <td> <strong> Health: </strong> <%= @user.health %></td>
 </tr>
