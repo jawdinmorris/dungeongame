@@ -1,0 +1,22 @@
+<h1> Store </h1>
+
+<h2> Upgrade Your Equipment </h2>
+<ul>
+
+  <li> Sword: <%= @user.sword %> </li>
+  <%= button_to "Upgrade Sword for #{@user.sword * 150} gold", swordButton_path, method: :get %>
+  <li> Spellbook: <%= @user.spellbook %>  </li>
+  <%= button_to "Upgrade Spellbook for #{@user.spellbook * 150} gold", spellbookButton_path, method: :get %>
+  <li> Head: <%= @user.helmet  %> </li>
+  <%= button_to "Upgrade Helmet for #{@user.helmet * 150} gold", helmetButton_path, method: :get %>
+  <li> Shoulders: <%= @user.shoulders %> </li>
+  <%= button_to "Upgrade Shoulders for #{@user.shoulders * 150} gold", shouldersButton_path, method: :get %>
+  <li> Chest: <%= @user.chest %> </li>
+  <%= button_to "Upgrade Chest for #{@user.chest * 150} gold", chestButton_path, method: :get %>
+  <li> Gloves: <%= @user.gloves %> </li>
+  <%= button_to "Upgrade Gloves for #{@user.gloves * 150} gold", glovesButton_path, method: :get %>
+  <li> Leggings: <%= @user.legs %> </li>
+  <%= button_to "Upgrade Legs for #{@user.legs * 150} gold", legsButton_path, method: :get %>
+  <li> Boots: <%= @user.boots %> </li>
+  <%= button_to "Upgrade Boots for #{@user.boots * 150} gold", bootsButton_path, method: :get %>
+</ul>
