@@ -85,9 +85,20 @@
   <p><strong> You won, you are awarded <%= @monster.xp_given %> xp and <%= @monster.gold_given %> gold. </strong> </p>
   <% @user.gold = @user.gold + @monster.gold_given %>
   <% @user.xp = @user.xp + @monster.xp_given %>
+  <!-- USER LEVELS UP -->
   <% if @monster.xp_given >= xpNeeded  %>
     <p><strong> Congratulations you have reached Level <%= @user.user_level + 1 %>. <strong> </p>
     <% @user.user_level = 1 + @user.user_level %>
+    <p> Attack increased by 2 </p>
+    <% @user.attack += 2 %>
+    <p> Defence increased by 2 </p>
+    <% @user.defence += 2 %>
+    <p> Health increased by 10 </p>
+    <% @user.health += 10 %>
+    <p> Accuracy increased by 0.2 </p>
+    <% @user.accuracy += 0.2 %>
+    <p> Evasion increased by 0.2 </p>
+    <% @user.evasion += 0.2 %>
     <% @user.xp = 0 + (@monster.xp_given - xpNeeded)%>
   <%end%>
   <!-- USER LOSES  -->
