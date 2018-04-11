@@ -1,13 +1,33 @@
 <div class = "container">
-  <h1> Welcome, <%= @user.user_name %> </h1>
-</div>
-<h2> Your stats: </h2>
-<ul>
+  <h1> Welcome home, <%= @user.user_name %> </h1>
+  <div class ="container">
+    <div class = row>
+      <div class ="col-sm-6">
+        <h2> Your stats: </h2>
+        <ul>
 
-  <li> Level: <%= @user.user_level %> </li>
-  <li> Exp: <%= @user.xp %> / <%= (10 + @user.user_level) * 10 %></li>
-    <li> Gold: <%= @user.gold %> </li>
-    <li> Health: <%= @user.health %> / 100</li>
-  <li> Attack: <%= @user.attack %> </li>
-  <li> Defence: <%= @user.defence %> </li>
-</ul>
+          <li> Level: <%= @user.user_level %> </li>
+          <li> Exp: <%= @user.xp %> / <%= (10 + @user.user_level) * 10 %></li>
+          <li> Gold: <%= @user.gold %> </li>
+          <li> Health: <%= @user.health %> / 100</li>
+          <li> Attack: <%= @user.attack %> </li>
+          <li> Defence: <%= @user.defence %> </li>
+        </ul>
+      </div>
+      <div class ="col-sm-6">
+        <h2> Your Gear: </h2>
+        <ul>
+
+          <li> Sword: <%= @user.sword %> </li>
+          <li> Spellbook: <%= @user.spellbook %>  </li>
+          <li> Head: <%= @user.helmet  %> </li>
+          <li> Shoulders: <%= @user.shoulders %> </li>
+          <li> Chest: <%= @user.chest %> </li>
+          <li> Gloves: <%= @user.gloves %> </li>
+          <li> Leggings: <%= @user.legs %> </li>
+          <li> Boots: <%= @user.boots %> </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

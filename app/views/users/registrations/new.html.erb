@@ -35,11 +35,6 @@
   </div>
 
   <div class="field">
-    <%= f.label :experience %>
-      <%= f.text_field :experience, :readonly => true, :value => 0 %>
-  </div>
-
-  <div class="field">
     <%= f.label :attack %>
       <%= f.text_field :attack, :readonly => true, :value => 10 %>
   </div>
@@ -54,7 +49,48 @@
       <%= f.text_field :health, :readonly => true, :value => 100 %>
   </div>
 
-
+  <div class="field">
+    <%= f.label :gold %>
+      <%= f.text_field :gold, :readonly => true, :value => 0 %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :xp %>
+      <%= f.text_field :xp, :readonly => true, :value => 0 %>
+  </div>
+<h2> Gear Details </h2>
+<div class="field">
+  <%= f.label :sword %>
+    <%= f.text_field :sword, :readonly => true, :value => 1 %>
+</div>
+<div class="field">
+  <%= f.label :spellbook %>
+    <%= f.text_field :spellbook, :readonly => true, :value => 1 %>
+</div>
+<div class="field">
+  <%= f.label :helmet %>
+    <%= f.text_field :helmet, :readonly => true, :value => 1 %>
+</div>
+<div class="field">
+  <%= f.label :shoulders %>
+    <%= f.text_field :shoulders, :readonly => true, :value => 1 %>
+</div>
+<div class="field">
+  <%= f.label :gloves %>
+    <%= f.text_field :gloves, :readonly => true, :value => 1 %>
+</div>
+<div class="field">
+  <%= f.label :chest %>
+    <%= f.text_field :chest, :readonly => true, :value => 1 %>
+</div>
+<div class="field">
+  <%= f.label :legs %>
+    <%= f.text_field :legs, :readonly => true, :value => 1 %>
+</div>
+<div class="field">
+  <%= f.label :boots %>
+    <%= f.text_field :boots, :readonly => true, :value => 1 %>
+</div>
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>
