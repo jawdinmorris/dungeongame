@@ -19,8 +19,8 @@
 <div class="row">
   <div class="col-sm-3"><strong> Level:</strong> <%= @user.user_level %></div>
   <div class="col-sm-3"><strong> Accuracy: </strong> <%= @user.accuracy.round(3) %>%</div>
-  <div class="col-sm-3"><strong> Defence:</strong><%= @user.defence %></div>
-  <div class="col-sm-3"> <strong>Quest: </div> <%= @user.quest_name %> (<%=@user.quest_num%>) </div>
+  <div class="col-sm-3"><strong> Defence: </strong><%= @user.defence %></div>
+  <div class="col-sm-3"><strong> Quest: </strong> <%= @user.quest_name %> (<%=@user.quest_num%>)</div>
 </div>
 <div class="row">
   <div class="col-sm-3"><strong> Exp: </strong> <%= @user.xp %> / <%=((10 + @user.user_level) * 10)%></div>
