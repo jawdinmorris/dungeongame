@@ -1,0 +1,9 @@
+<div class ="container">
+  <% if @user.quest_complete == false && @user.quest_num > 0 %>
+  <p> Please come see me when. You have completed your bounty of <%=@user.quest_num%> <%=@user.quest_name%>s
+    <%elsif @user.quest_complete == false && @user.quest_num == 0%>
+      <%= button_to "Hand in Quest!", questButton_path, method: :get %>
+      <%else %>
+      <%= button_to "Give me a new Quest!", newQuestButton_path, method: :get %>
+      <% end %>
+</div>

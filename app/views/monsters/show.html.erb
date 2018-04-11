@@ -101,6 +101,10 @@
     <% @user.evasion += 0.2 %>
     <% @user.xp = 0 + (@monster.xp_given - xpNeeded)%>
   <%end%>
+  <% if @user.quest_name.downcase == @monster.name.downcase && @user.quest_num > 0 %>
+  <% @user.quest_num -=1 %>
+  <p> You defeated a bounty monster. You have <%= @user.quest_num%> <%=@user.quest_name%> left to defeat. </p>
+  <%end %>
   <!-- USER LOSES  -->
 <% elsif userHealth <= 0 %>
   <p><strong> You lost, hang your head in shame. </strong></p>

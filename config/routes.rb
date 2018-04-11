@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :monsters
   resources :store, only: [:index]
+  resources :quest, only: [:index]
 
   devise_for :users, controllers: { sessions: 'users/sessions' }
   resources :users, only: [:show]
@@ -17,4 +18,6 @@ Rails.application.routes.draw do
   get '/legsButton', to: 'store#legsButton', as: 'legsButton'
   get '/bootsButton', to: 'store#bootsButton', as: 'bootsButton'
 
+    get '/questButton', to: 'quest#questButton', as: 'questButton'
+  get '/newQuestButton', to: 'quest#newQuestButton', as: 'newQuestButton'
 end
