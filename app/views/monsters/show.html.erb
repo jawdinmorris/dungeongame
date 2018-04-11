@@ -5,6 +5,8 @@
  <%userHealth = @user.health %>
 <% userDamageAvg = [] %>
 <% monsterDamageAvg = [] %>
+<% userMissCount = 0 %>
+<% monsterMissCount = 0 %>
 <% xpNeeded = ((10 + @user.user_level) * 10) - @user.xp %>
 
 <div class = "container">
@@ -28,31 +30,56 @@
 <div id = "battleScroll">
 <% until @monster.health <= 0 || userHealth <= 0 do %>
   <!-- USER ATTACK -->
+
   <% if @monster.health > 0 && userHealth > 0 %>
-  <% userCurrentDamage = rand(userDamage..(userDamage*2).round) %>
-    <% @monster.health = @monster.health - userCurrentDamage %>
-    <% userDamageAvg << userCurrentDamage %>
-    <p style="text-align:left; color:green"><%=  @user.user_name %> hit's <%= @monster.name %> for <%=  userCurrentDamage %> damage. <br>
-    The <%= @monster.name %> has <%= @monster.health %> health left </p>
- <% end %>
+  <% accuracyRate = rand(0..100) %>
+    <% if accuracyRate <= @user.accuracy %>
+      <% userCurrentDamage = rand(userDamage..(userDamage*2).round) %>
+      <% @monster.health = @monster.health - userCurrentDamage %>
+      <% userDamageAvg << userCurrentDamage %>
+      <p style="text-align:left; color:green">You hit <%= @monster.name %> for <%=  userCurrentDamage %> damage. <br>
+      The <%= @monster.name %> has <%= @monster.health %> health left </p>
+      <% else %>
+      <% userMissCount += 1 %>
+      <p style="text-align:left; color:green">You miss <%= @monster.name %></p>
+        <%end%>
+  <% end %>
  <!-- MONSTER ATTACK -->
  <% if userHealth > 0 && @monster.health > 0%>
+ <% evasionRate = rand(0..100) %>
+ <% if evasionRate >= @user.evasion %>
  <% monsterCurrentDamage = rand(monsterDamage..(monsterDamage*2).round) %>
     <% userHealth = userHealth - monsterDamage %>
     <% monsterDamageAvg << monsterCurrentDamage %>
-   <p style="text-align:right; color:red"><%=  @monster.name %> hit's <%= @user.user_name %> for <%= monsterCurrentDamage %> damage. <br>
-   The <%= @user.user_name %> has <%= userHealth %> health left </p>
+   <p style="text-align:right; color:red"><%=  @monster.name %> hit's you for <%= monsterCurrentDamage %> damage. <br>
+   You have <%= userHealth %> health left </p>
+   <%else %>
+   <% monsterMissCount += 1 %>
+   <p style="text-align:right; color:red"><%= @monster.name %> misses you </p>
 <% end %>
+<% end %>
+
+
 <% end %>
 </div>
 
 <!-- BATTLE RECORD -->
-<p>
-<%= @user.user_name %> hit <%= userDamageAvg.count%> times. (Average: <% userTest = userDamageAvg.sum / userDamageAvg.size.to_f %>  <%=(userTest.is_a?(Float) && userTest.nan?) ? 0 : userTest.round %> )
-</p>
-<p>
-<%= @monster.name %> hit <%= monsterDamageAvg.count%> times. (Average: <% monsterTest = monsterDamageAvg.sum / monsterDamageAvg.size.to_f %>  <%=(monsterTest.is_a?(Float) && monsterTest.nan?) ? 0 : monsterTest.round%> )
-</p>
+<div class = "row">
+  <div class = "col-sm-6">
+  <%= @user.user_name %> had <%= userDamageAvg.count + userMissCount %> turns.
+  <br>
+<%= @user.user_name %> hit <%= userDamageAvg.count%> times. (Average: <% userTest = userDamageAvg.sum / userDamageAvg.size.to_f %>  <%=(userTest.is_a?(Float) && userTest.nan?) ? 0 : userTest.round %> damage.)
+<br>
+<%= @user.user_name %> missed <%= userMissCount %> times.
+</div>
+<div class = "col-sm-6">
+    <%= @monster.name %> had <%= monsterDamageAvg.count + monsterMissCount %> turns.
+    <br>
+<%= @monster.name %> hit <%= monsterDamageAvg.count%> times. (Average: <% monsterTest = monsterDamageAvg.sum / monsterDamageAvg.size.to_f %>  <%=(monsterTest.is_a?(Float) && monsterTest.nan?) ? 0 : monsterTest.round%> damage.)
+<br>
+<%= @monster.name %> missed <%= monsterMissCount %> times.
+</div>
+</div>
 <!-- USER WINS -->
 <% if @monster.health <= 0 %>
   <p><strong> You won, you are awarded <%= @monster.xp_given %> xp and <%= @monster.gold_given %> gold. </strong> </p>

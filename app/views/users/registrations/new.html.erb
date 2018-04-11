@@ -45,6 +45,19 @@
   </div>
 
   <div class="field">
+    <%= f.label :accuracy %>
+      <%= f.text_field :accuracy, :readonly => true, :value =>50 %>
+  </div>
+  <div class="field">
+    <%= f.label :evasion %>
+      <%= f.text_field :evasion, :readonly => true, :value => 1 %>
+  </div>
+  <div class="field">
+    <%= f.label :defence %>
+      <%= f.text_field :defence, :readonly => true, :value => 10 %>
+  </div>
+
+  <div class="field">
     <%= f.label :health %>
       <%= f.text_field :health, :readonly => true, :value => 100 %>
   </div>
@@ -53,7 +66,7 @@
     <%= f.label :gold %>
       <%= f.text_field :gold, :readonly => true, :value => 0 %>
   </div>
-  
+
   <div class="field">
     <%= f.label :xp %>
       <%= f.text_field :xp, :readonly => true, :value => 0 %>

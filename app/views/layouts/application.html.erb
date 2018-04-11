@@ -17,14 +17,14 @@
   <div class="col-sm-3"> <strong>  <%= link_to('Map', root_path) %></strong></div>
 </div>
 <div class="row">
-  <div class="col-sm-3"><strong>Level:</strong> <%= @user.user_level %></div>
-  <div class="col-sm-3"></div>
+  <div class="col-sm-3"><strong> Level:</strong> <%= @user.user_level %></div>
+  <div class="col-sm-3"><strong> Accuracy: </strong> <%= @user.accuracy %>%</div>
   <div class="col-sm-3"><strong> Defence:</strong><%= @user.defence %></div>
   <div class="col-sm-3"> <strong> <%= link_to 'Profile', current_user %> </strong> </div>
 </div>
 <div class="row">
   <div class="col-sm-3"><strong> Exp: </strong> <%= @user.xp %> / <%=((10 + @user.user_level) * 10)%></div>
-  <div class="col-sm-3"></div>
+  <div class="col-sm-3"><strong> Evasion: </strong> <%= @user.evasion %>%</div>
   <div class="col-sm-3"><strong> Health: </strong> <%= @user.health %></div>
   <div class="col-sm-3"> <strong>  <%= link_to('Logout', destroy_user_session_path, method: :delete) %> </strong></div>
 </div>
