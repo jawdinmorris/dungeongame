@@ -34,7 +34,7 @@
   <% if @monster.health > 0 && userHealth > 0 %>
   <% accuracyRate = rand(0..100) %>
     <% if accuracyRate <= @user.accuracy %>
-      <% userCurrentDamage = rand(userDamage..(userDamage*2).round) %>
+      <% userCurrentDamage = (rand(userDamage..(userDamage*2).round)) + (@user.sword * userDamage).round %>
       <% @monster.health = @monster.health - userCurrentDamage %>
       <% userDamageAvg << userCurrentDamage %>
       <p style="text-align:left; color:green">You hit <%= @monster.name %> for <%=  userCurrentDamage %> damage. <br>
@@ -83,32 +83,30 @@
 <!-- USER WINS -->
 <% if @monster.health <= 0 %>
   <p><strong> You won, you are awarded <%= @monster.xp_given %> xp and <%= @monster.gold_given %> gold. </strong> </p>
+  <% if @monster.xp_given >= xpNeeded  %>
+    <p><strong> Congratulations you have achieved a new level. <strong> </p>
+  <%end%>
+  <% if @user.quest_name.downcase == @monster.name.downcase && @user.quest_num > 0 %>
+  <p> You defeated a bounty monster. You have <%= @user.quest_num - 1%> <%=@user.quest_name%> left to defeat. </p>
+  <%end %>
   <%= button_to "COLLECT WINNINGS & BATTLE AGAIN", collectLootAndBattleButton_path, method: :get %>
   <%= button_to "COLLECT WINNINGS & LEAVE", collectLootAndLeaveButton_path, method: :get %>
   <% if @user.quest_num <= 1 %>
   <%= button_to "COLLECT WINNINGS & HEAD TO BOUNTY OFFICE", collectLootAndQuestButton_path, method: :get %>
   <% end %>
   <!-- USER LEVELS UP -->
-  <% if @monster.xp_given >= xpNeeded  %>
-    <p><strong> Congratulations you have reached Level <%= @user.user_level + 1 %>. <strong> </p>
-    <p> Attack increased by 2 </p>
-    <p> Defence increased by 2 </p>
-    <p> Health increased by 10 </p>
-    <p> Accuracy increased by 0.2 </p>
-    <p> Evasion increased by 0.2 </p>
-  <%end%>
-  <% if @user.quest_name.downcase == @monster.name.downcase && @user.quest_num > 0 %>
-  <p> You defeated a bounty monster. You have <%= @user.quest_num - 1%> <%=@user.quest_name%> left to defeat. </p>
-  <%end %>
+
   <!-- USER LOSES  -->
 <% elsif userHealth <= 0 %>
+ <% @user.lose_counter += 1 %>
+ <% @user.save %>
   <p><strong> You lost, hang your head in shame. </strong></p>
   <form action="" method="get">
     <input type="submit" value="Try not to lose again" id="myBtn" class="btnDisable" disabled>
   </form>
   <%= link_to 'Leave in shame', monsters_path %>
 <% end %>
-<% @user.save %>
+
 <div id="wrapper">
 
 

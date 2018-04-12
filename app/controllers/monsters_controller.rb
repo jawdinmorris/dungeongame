@@ -82,21 +82,29 @@ class MonstersController < ApplicationController
   def collectLootButton
     vars = Rails.application.routes.recognize_path(request.referrer)
     @monster = Monster.find(vars[:id])
-    xpNeeded = ((10 + @user.user_level) * 10) - @user.xp
     @user.gold = @user.gold + @monster.gold_given
-    @user.xp = @user.xp + @monster.xp_given
+    awardedXp = @monster.xp_given
+    @user.win_counter += 1
     if @user.quest_name.downcase == @monster.name.downcase && @user.quest_num > 0
      @user.quest_num -=1
-   end
-     if @monster.xp_given >= xpNeeded
+    end
+    xpNeeded = ((10 + @user.user_level) * 10) - @user.xp
+    while awardedXp > 0
+      xpNeeded = ((10 + @user.user_level) * 10) - @user.xp
+     if awardedXp >= xpNeeded
        @user.user_level = 1 + @user.user_level
        @user.attack += 2
        @user.defence += 2
        @user.health += 10
        @user.accuracy += 0.2
        @user.evasion += 0.2
-       @user.xp = 0 + (@monster.xp_given - xpNeeded)
+       awardedXp = awardedXp- xpNeeded
+       @user.xp = 0
+     else
+       @user.xp = @user.xp + awardedXp
+       awardedXp = 0
      end
+   end
      @user.save
 
   end
