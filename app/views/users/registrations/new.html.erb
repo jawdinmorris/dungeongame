@@ -104,6 +104,18 @@
   <%= f.label :boots %>
     <%= f.text_field :boots, :readonly => true, :value => 1 %>
 </div>
+<div class="field">
+  <%= f.label :quest_name %>
+    <%= f.text_field :quest_name, :readonly => true, :value => "rats" %>
+</div>
+<div class="field">
+  <%= f.label :quest_num %>
+    <%= f.text_field :quest_num, :readonly => true, :value => 3 %>
+</div>
+<div class="field">
+  <%= f.label :quest_complete %>
+    <%= f.text_field :quest_complete, :readonly => true, :value => false %>
+</div>
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>
