@@ -12,8 +12,8 @@
           <li> Health: <%= @user.health %> / 100</li>
           <li> Attack: <%= @user.attack %> </li>
           <li> Defence: <%= @user.defence %> </li>
-          <li> Accuracy: <%= @user.accuracy %> </li>
-          <li> Evasion: <%= @user.evasion %> </li>
+          <li> Accuracy: <%= @user.accuracy.round(3) %> </li>
+          <li> Evasion: <%= @user.evasion.round(3) %> </li>
         </ul>
       </div>
       <div class ="col-sm-6">

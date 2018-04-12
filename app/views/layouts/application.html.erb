@@ -20,13 +20,20 @@
   <div class="col-sm-3"><strong> Level:</strong> <%= @user.user_level %></div>
   <div class="col-sm-3"><strong> Accuracy: </strong> <%= @user.accuracy.round(3) %>%</div>
   <div class="col-sm-3"><strong> Defence: </strong><%= @user.defence %></div>
-  <div class="col-sm-3"><strong> Quest: </strong> <%= @user.quest_name %> (<%=@user.quest_num%>)</div>
+  <div class="col-sm-3"><strong> <%= link_to('Profile', user_path(current_user.id)) %> </strong></div>
 </div>
 <div class="row">
   <div class="col-sm-3"><strong> Exp: </strong> <%= @user.xp %> / <%=((10 + @user.user_level) * 10)%></div>
   <div class="col-sm-3"><strong> Evasion: </strong> <%= @user.evasion.round(3) %>%</div>
   <div class="col-sm-3"><strong> Health: </strong> <%= @user.health %></div>
   <div class="col-sm-3"> <strong>  <%= link_to('Logout', destroy_user_session_path, method: :delete) %> </strong></div>
+</div>
+<div class = "row">
+  <div class="col-sm-3"><% if @user.quest_num ==0 && @user.quest_name != "No Quest Active" %>
+    <strong> Quest: <%= link_to('Hand In', quest_index_path) %></strong>
+                        <% else %>
+                          <strong> Quest: </strong> <%= @user.quest_name %> (<%=@user.quest_num%>)</div>
+                          <%end%>
 </div>
 </div>
 

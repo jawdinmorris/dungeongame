@@ -18,6 +18,9 @@ Rails.application.routes.draw do
   get '/legsButton', to: 'store#legsButton', as: 'legsButton'
   get '/bootsButton', to: 'store#bootsButton', as: 'bootsButton'
 
-    get '/questButton', to: 'quest#questButton', as: 'questButton'
+  get '/questButton', to: 'quest#questButton', as: 'questButton'
   get '/newQuestButton', to: 'quest#newQuestButton', as: 'newQuestButton'
+  get '/newcollectLootAndBattle', to: 'monsters#collectLootAndBattleButton', as: 'collectLootAndBattleButton'
+  get '/newcollectLootAndLeave', to: 'monsters#collectLootAndLeaveButton', as: 'collectLootAndLeaveButton'
+  get '/newcollectLootAndQuest', to: 'monsters#collectLootAndQuestButton', as: 'collectLootAndQuestButton'
 end

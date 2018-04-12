@@ -65,6 +65,45 @@ class MonstersController < ApplicationController
     end
   end
 
+ def collectLootAndBattleButton
+   collectLootButton
+    redirect_to request.referrer
+ end
+
+ def collectLootAndLeaveButton
+   collectLootButton
+    redirect_to monsters_path
+ end
+ def collectLootAndQuestButton
+   collectLootButton
+    redirect_to quest_index_path
+ end
+
+  def collectLootButton
+    vars = Rails.application.routes.recognize_path(request.referrer)
+    @monster = Monster.find(vars[:id])
+    xpNeeded = ((10 + @user.user_level) * 10) - @user.xp
+    @user.gold = @user.gold + @monster.gold_given
+    @user.xp = @user.xp + @monster.xp_given
+    if @user.quest_name.downcase == @monster.name.downcase && @user.quest_num > 0
+     @user.quest_num -=1
+   end
+     if @monster.xp_given >= xpNeeded
+       @user.user_level = 1 + @user.user_level
+       @user.attack += 2
+       @user.defence += 2
+       @user.health += 10
+       @user.accuracy += 0.2
+       @user.evasion += 0.2
+       @user.xp = 0 + (@monster.xp_given - xpNeeded)
+     end
+     @user.save
+
+  end
+
+  def battleMonster
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_monster
